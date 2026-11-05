@@ -1,5 +1,18 @@
 'use strict';
 
+function showProcessPhoto({ file, alt, caption }) {
+  const photo = new Image(1080, 720);
+  photo.loading = 'lazy';
+  photo.decoding = 'async';
+  photo.alt = alt;
+  photo.sizes = '(min-width: 1400px) 510px, (min-width: 992px) 39vw, (min-width: 768px) 696px, (min-width: 576px) 516px, 100vw';
+  photo.srcset = `images/${file}-480.webp 480w, images/${file}.webp 1080w`;
+  photo.src = `images/${file}.webp`;
+  const note = document.createElement('figcaption');
+  note.textContent = caption;
+  document.getElementById('program-process').replaceChildren(photo, note);
+}
+
 function showWashProgram(program) {
   document.title = program.name + ' - Пена';
   document.querySelector('meta[property="og:title"]').content = document.title;
@@ -17,6 +30,7 @@ function showWashProgram(program) {
   const photo = document.getElementById('product-photo');
   photo.src = program.image;
   photo.alt = program.alt;
+  showProcessPhoto(program.processPhoto);
   const steps = document.getElementById('product-steps');
   for (const [stage, description] of program.steps) {
     const row = steps.insertRow();
