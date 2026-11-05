@@ -87,3 +87,48 @@
   outline: 3px solid var(--mint);
   outline-offset: 3px;
 }
+
+.site-header .nav-link.active { font-weight: 700; }
+
+.program-link {
+  color: inherit;
+  text-decoration-color: #94b9af;
+  text-decoration-thickness: 1px;
+  text-underline-offset: .18em;
+}
+
+.program-link:hover { color: #21665c; }
+
+.program-photo {
+  aspect-ratio: 16 / 9;
+  height: auto;
+  object-fit: cover;
+}
+
+.program-badge, .visit-panel {
+  background-color: #e2f2e9;
+  color: #204d41;
+}
+
+.btn-primary {
+  --bs-btn-bg: var(--ink);
+  --bs-btn-border-color: var(--ink);
+  --bs-btn-hover-bg: #23536a;
+  --bs-btn-hover-border-color: #23536a;
+  --bs-btn-active-bg: #103347;
+  --bs-btn-active-border-color: #103347;
+}
+
+.btn-outline-primary {
+  --bs-btn-color: var(--ink);
+  --bs-btn-border-color: #79939e;
+  --bs-btn-hover-bg: var(--ink);
+  --bs-btn-hover-border-color: var(--ink);
+  --bs-btn-active-bg: var(--ink);
+  --bs-btn-active-border-color: var(--ink);
+}
+
+.faq .accordion {
+  --bs-accordion-active-color: var(--ink);
+  --bs-accordion-active-bg: #e2f2e9;
+}
