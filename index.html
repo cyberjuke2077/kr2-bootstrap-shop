@@ -39,27 +39,63 @@
 
   <main id="main-content" tabindex="-1">
     <section class="home-hero" aria-labelledby="hero-title">
-      <div class="container">
-        <div class="row g-0 align-items-stretch">
-          <div class="col-12 col-md-6 col-lg-5 hero-copy">
-            <a class="hero-address" href="https://yandex.ru/maps/213/moscow/?text=%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C%20%D0%BF%D1%80%D0%BE%D1%81%D0%BF%D0%B5%D0%BA%D1%82%20%D0%92%D0%B5%D1%80%D0%BD%D0%B0%D0%B4%D1%81%D0%BA%D0%BE%D0%B3%D0%BE%2C%2078" target="_blank" rel="noopener noreferrer">Проспект Вернадского, 78 <span aria-hidden="true">↗</span></a>
-            <h1 id="hero-title">Ручная мойка <span>в Москве</span></h1>
-            <p>Моем кузов, чистим салон и вручную сушим автомобиль. Три программы от 650&nbsp;₽, экспресс-мойка занимает 20 минут.</p>
-            <div class="hero-actions">
-              <a class="btn btn-mint" href="order.html">Записаться на мойку <span aria-hidden="true">→</span></a>
-              <a class="hero-link" href="#programs">Сравнить программы</a>
+      <picture class="hero-backdrop">
+        <source media="(max-width: 767.98px) and (orientation: portrait)"
+                srcset="images/wash-portrait-480.webp 480w, images/wash-portrait.webp 864w"
+                sizes="100vw" width="864" height="1080">
+        <img src="images/wash-panorama.webp"
+             srcset="images/wash-panorama-960.webp 960w, images/wash-panorama.webp 1728w"
+             sizes="100vw" width="1728" height="864" fetchpriority="high"
+             alt="Струя воды смывает пену с тёмного седана в моечном боксе">
+      </picture>
+      <div class="hero-content">
+        <div class="container">
+          <div class="hero-copy">
+            <div class="hero-location">
+              <a class="hero-address" href="https://yandex.ru/maps/213/moscow/?text=%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C%20%D0%BF%D1%80%D0%BE%D1%81%D0%BF%D0%B5%D0%BA%D1%82%20%D0%92%D0%B5%D1%80%D0%BD%D0%B0%D0%B4%D1%81%D0%BA%D0%BE%D0%B3%D0%BE%2C%2078" target="_blank" rel="noopener noreferrer">Проспект Вернадского, 78 <span aria-hidden="true">↗</span></a>
+              <span class="hero-hours">Ежедневно, 08:00-22:00</span>
             </div>
-          </div>
-          <div class="col-12 col-md-6 col-lg-7 hero-media">
-            <img src="images/car-wash.webp" width="1120" height="840" alt="Белая пена на капоте тёмно-бирюзового автомобиля в моечном боксе" fetchpriority="high">
+            <h1 id="hero-title">Ручная мойка <span>в Москве</span></h1>
+            <p>Экспресс-мойка кузова - 650&nbsp;₽ за&nbsp;20&nbsp;минут.</p>
+            <div class="hero-actions">
+              <a class="btn btn-photo" href="order.html" aria-label="Записаться на мойку">Записаться <span aria-hidden="true">→</span></a>
+              <a class="hero-link" href="#programs">Смотреть цены</a>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
+    <section id="about" class="container wash-story" aria-labelledby="about-title">
+      <div class="story-heading">
+        <h2 id="about-title">Как проходит мойка</h2>
+        <p>За работой мастера можно наблюдать через окно из комнаты ожидания. Там есть Wi-Fi.</p>
+      </div>
+      <div class="story-spread">
+        <figure class="story-lead">
+          <img src="images/wheel-care.webp" srcset="images/wheel-care-480.webp 480w, images/wheel-care.webp 1080w"
+               sizes="(min-width: 1400px) 680px, (min-width: 992px) 52vw, (min-width: 768px) 696px, (min-width: 576px) 516px, 100vw"
+               width="1080" height="720" loading="lazy" decoding="async" alt="Мастер очищает кистью спицы колёсного диска в пене">
+          <figcaption><h3>Кузов и диски</h3><p>Для колёс берём отдельную кисть, для кузова - мягкую рукавицу.</p></figcaption>
+        </figure>
+        <figure class="story-detail">
+          <img src="images/cabin-care.webp" srcset="images/cabin-care-480.webp 480w, images/cabin-care.webp 1080w"
+               sizes="(min-width: 1400px) 310px, (min-width: 992px) 23vw, (min-width: 576px) 44vw, 40vw"
+               width="1080" height="720" loading="lazy" decoding="async" alt="Мастер протирает переднюю панель салона возле дефлектора">
+          <figcaption><h3>Уборка салона</h3><p>Пылесосим обивку и пол, очищаем коврики, панель и двери.</p></figcaption>
+        </figure>
+        <figure class="story-detail">
+          <img src="images/hand-drying.webp" srcset="images/hand-drying-480.webp 480w, images/hand-drying.webp 1080w"
+               sizes="(min-width: 1400px) 310px, (min-width: 992px) 23vw, (min-width: 576px) 44vw, 40vw"
+               width="1080" height="720" loading="lazy" decoding="async" alt="Рука в перчатке собирает капли с кузова вафельной микрофиброй">
+          <figcaption><h3>Ручная сушка</h3><p>После ополаскивания собираем капли с кузова и стёкол чистой микрофиброй.</p></figcaption>
+        </figure>
+      </div>
+    </section>
+
     <section id="programs" class="container section-space" aria-labelledby="programs-title">
       <div class="section-heading">
-        <h2 id="programs-title">Программы мойки</h2>
+        <div><h2 id="programs-title">Программы мойки</h2><p class="rates-note">Цена известна заранее. Дополнительные работы мастер согласует с вами.</p></div>
         <a class="text-action" href="catalog.html">Состав и цены <span aria-hidden="true">→</span></a>
       </div>
       <div class="row g-3 g-lg-4">
@@ -86,17 +122,6 @@
             <p class="service-description">Моем машину снаружи и внутри, включая внутреннюю сторону стёкол.</p>
             <div class="rate-bottom"><strong>1&nbsp;500&nbsp;₽</strong><a class="text-action" href="order.html?program=complete" aria-label="Выбрать время для программы «Комплексная мойка»">Выбрать время <span aria-hidden="true">→</span></a></div>
           </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="about" class="care-section" aria-labelledby="about-title">
-      <div class="container">
-        <div class="section-heading"><h2 id="about-title">Как проходит мойка</h2></div>
-        <div class="row g-4">
-          <div class="col-12 col-md-4"><h3>До начала работ</h3><p>Вы выбираете программу с фиксированной ценой. Дополнительные работы мастер заранее согласует с вами.</p></div>
-          <div class="col-12 col-md-4"><h3>В боксе</h3><p>Колёса и кузов моем отдельным инвентарём. Для сушки кузова и стёкол используем чистую микрофибру.</p></div>
-          <div class="col-12 col-md-4"><h3>Пока ждёте</h3><p>В комнате ожидания есть Wi-Fi. За машиной можно наблюдать через окно.</p></div>
         </div>
       </div>
     </section>
