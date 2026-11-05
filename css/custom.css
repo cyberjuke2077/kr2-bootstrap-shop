@@ -1,0 +1,89 @@
+:root {
+  --ink: #132f46;
+  --mint: #b7f4d9;
+  --bs-body-color: var(--ink);
+  --bs-body-bg: #f7f8f5;
+}
+
+.site-header, .hero, .site-footer {
+  background: var(--ink);
+  color: #fff;
+}
+
+.site-header {
+  border-bottom: 1px solid #ffffff30;
+}
+
+.site-header .navbar {
+  --bs-navbar-color: #e0e9ed;
+  --bs-navbar-hover-color: var(--mint);
+}
+
+.navbar-toggler, .wash-button { min-height: 2.75rem; }
+
+.wordmark {
+  font-size: 1.8rem;
+  font-weight: 800;
+  letter-spacing: -.06em;
+  line-height: 1;
+}
+
+.hero-title, .section-title, .price {
+  letter-spacing: -.045em;
+  line-height: 1.05;
+}
+
+.hero-title { font-size: clamp(2.8rem, 5.7vw, 5.2rem); }
+.hero-title span { color: var(--mint); }
+.section-title { font-size: clamp(2rem, 3.3vw, 3.2rem); }
+.hero-description {
+  max-width: 37ch;
+  color: #dae6e9;
+  font-size: 1.1rem;
+}
+
+.hero-photo {
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+}
+
+.wash-button {
+  --bs-btn-color: var(--ink);
+  --bs-btn-bg: var(--mint);
+  --bs-btn-hover-color: var(--ink);
+  --bs-btn-hover-bg: #d5ffe9;
+  --bs-btn-active-bg: #98e9c7;
+  --bs-btn-active-color: var(--ink);
+}
+
+.wash-button span { margin-inline-start: .5rem; }
+
+.program {
+  --bs-card-bg: #fff;
+  --bs-card-border-color: #ccd5d7;
+  --bs-card-border-radius: 1rem;
+}
+
+.duration {
+  color: #28645c;
+  font-size: .875rem;
+  font-weight: 650;
+}
+
+.price {
+  border-top: 1px solid #dce2e1;
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.about { background: #e5f2eb; }
+
+.footer-note {
+  border-top: 1px solid #ffffff30;
+  color: #c8d6de;
+}
+
+.site-header :focus-visible, .hero :focus-visible {
+  outline: 3px solid var(--mint);
+  outline-offset: 3px;
+}
