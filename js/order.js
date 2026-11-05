@@ -4,101 +4,125 @@ const bookingForm = document.getElementById('booking-form');
 const programField = bookingForm.elements.namedItem('program');
 const dateField = bookingForm.elements.namedItem('date');
 const timeField = bookingForm.elements.namedItem('time');
+const bookingError = document.getElementById('booking-error');
 const confirmation = document.getElementById('confirmation-modal');
-const moscowClock = new Intl.DateTimeFormat('ru-RU', {
-  timeZone: 'Europe/Moscow', year: 'numeric', month: '2-digit', day: '2-digit',
-  hour: '2-digit', minute: '2-digit', hourCycle: 'h23'
-});
-
-function moscowNow() {
-  const values = {};
-  for (const part of moscowClock.formatToParts(new Date())) {
-    values[part.type] = part.value;
-  }
-  return {
-    day: values.year + '-' + values.month + '-' + values.day,
-    minutes: Number(values.hour) * 60 + Number(values.minute)
-  };
-}
-
-function startTimes(duration, earliestMinute) {
-  const times = [];
-  const opening = 8 * 60;
-  const closing = 22 * 60;
-  for (let start = opening; start + duration <= closing; start += 30) {
-    if (start < earliestMinute) continue;
-    const hour = String(Math.floor(start / 60)).padStart(2, '0');
-    const minute = String(start % 60).padStart(2, '0');
-    times.push(hour + ':' + minute);
-  }
-  return times;
-}
-
-function visitTimeLabel() {
-  if (!dateField.valueAsDate) return 'Дата и время появятся после выбора.';
-  const day = dateField.valueAsDate.toLocaleDateString('ru-RU', {
-    timeZone: 'UTC', day: 'numeric', month: 'long', year: 'numeric'
-  });
-  return timeField.value ? day + ', ' + timeField.value + ' (МСК)' : day;
-}
+const retryTimes = document.getElementById('retry-times');
+const preset = findWashProgram(new URLSearchParams(location.search).get('program'));
+let timesRevision = 0;
+let savingBooking = false;
 
 function updateVisit() {
   const program = findWashProgram(programField.value);
-  document.getElementById('visit-program').textContent = program
-    ? program.name + ' · ' + program.minutes + ' минут · ' + programPrice(program)
-    : 'Выберите программу';
-  document.getElementById('visit-time').textContent = visitTimeLabel();
+  document.getElementById('visit-program').textContent = program?.name || 'Выберите программу';
+  document.getElementById('visit-duration').textContent = program ? program.minutes + ' минут' : 'По программе';
+  document.getElementById('visit-price').textContent = program ? programPrice(program) : 'По программе';
+  let label = 'Пока не выбраны';
+  if (dateField.valueAsDate && !dateField.validity.rangeUnderflow) {
+    label = visitDayLabel(dateField.value) + (timeField.value ? ', ' + timeField.value : '');
+  }
+  document.getElementById('visit-time').textContent = label;
 }
 
-function refreshTimes() {
-  const now = moscowNow();
-  const program = findWashProgram(programField.value);
-  const previousTime = timeField.value;
-  const noSlotsMessage = 'На этот день подходящего времени уже нет. Выберите следующую дату.';
-  dateField.min = now.day;
-  const ready = program && dateField.value && !dateField.validity.rangeUnderflow;
-  const earliest = dateField.value === now.day ? now.minutes + 1 : 0;
-  const times = ready ? startTimes(program.minutes, earliest) : [];
-  const exhausted = ready && times.length === 0;
-
+function setTimeChoices(times, hint, previous = '') {
   timeField.replaceChildren(new Option('Выберите время', ''));
   for (const time of times) timeField.add(new Option(time, time));
-  if (times.includes(previousTime)) timeField.value = previousTime;
-  timeField.disabled = times.length === 0;
-  dateField.setCustomValidity(exhausted ? noSlotsMessage : '');
-  document.getElementById('booking-date-error').textContent =
-    exhausted ? noSlotsMessage : 'Выберите сегодняшнюю или будущую дату.';
-  const hint = document.getElementById('booking-time-hint');
-  if (exhausted) hint.textContent = noSlotsMessage;
-  else if (ready) hint.textContent = 'Показаны сеансы, которые закончатся до закрытия.';
-  else hint.textContent = 'Сначала выберите программу и подходящую дату.';
+  if (times.includes(previous)) timeField.value = previous;
+  timeField.disabled = !times.length;
+  if (bookingForm.classList.contains('was-validated')) {
+    timeField.setAttribute('aria-invalid', String(timeField.willValidate && !timeField.validity.valid));
+  }
+  document.getElementById('booking-time-hint').textContent = hint;
   updateVisit();
+}
+
+function setDateProblem(message = '') {
+  dateField.setCustomValidity(message);
+  document.getElementById('booking-date-error').textContent = message || 'Выберите сегодняшнюю или будущую дату.';
+  if (bookingForm.classList.contains('was-validated')) {
+    dateField.setAttribute('aria-invalid', String(!dateField.validity.valid));
+  }
+}
+
+async function refreshTimes() {
+  const revision = ++timesRevision;
+  const program = findWashProgram(programField.value);
+  const day = dateField.value;
+  const previous = timeField.value;
+  dateField.min = moscowNow().day;
+  setDateProblem();
+  retryTimes.hidden = true;
+  if (!program || !dateField.valueAsDate || dateField.validity.rangeUnderflow) {
+    setTimeChoices([], 'Сначала выберите программу и подходящую дату.');
+    return;
+  }
+
+  timeField.disabled = true;
+  try {
+    const bookings = await readRequests(day);
+    if (revision !== timesRevision) return;
+    const times = availableStarts(day, program.minutes, bookings);
+    const hint = times.length ? 'Учитываем часы работы и ваши сохранённые визиты.' : 'Для этой программы на выбранный день времени больше нет.';
+    if (!times.length) setDateProblem(hint);
+    setTimeChoices(times, hint, previous);
+  } catch {
+    if (revision !== timesRevision) return;
+    const error = 'Не удалось прочитать расписание в этом браузере. Разрешите хранение данных и повторите проверку.';
+    setDateProblem(error);
+    setTimeChoices([], error);
+    retryTimes.hidden = false;
+  }
+}
+
+function showBookingError(message) {
+  bookingError.textContent = message;
+  bookingError.hidden = false;
+}
+
+async function submitBooking(event) {
+  event.preventDefault();
+  if (savingBooking) return;
+  bookingError.hidden = true;
+  dateField.min = moscowNow().day;
+  if (!validateContactForm(bookingForm)) return;
+  const program = findWashProgram(programField.value);
+  if (!program || timeField.disabled || !timeField.value) {
+    showBookingError('Выберите доступное время начала визита.');
+    return;
+  }
+
+  savingBooking = true;
+  setFormPending(bookingForm, true, 'Сохраняем запись…');
+  try {
+    const record = createRequest('booking', bookingForm, program);
+    const [hours, minutes] = timeField.value.split(':').map(Number);
+    record.day = dateField.value;
+    record.start = hours * 60 + minutes;
+    await saveRequest(record);
+    showReceipt(document.getElementById('confirmation-summary'), record);
+    bookingForm.reset();
+    bootstrap.Modal.getOrCreateInstance(confirmation).show();
+  } catch (error) {
+    showBookingError(error instanceof VisitConflict ? error.message : 'Запись не сохранена. Проверьте разрешение на хранение данных и попробуйте ещё раз.');
+    await refreshTimes();
+  } finally {
+    savingBooking = false;
+    setFormPending(bookingForm, false);
+    if (!bookingError.hidden) bookingError.focus();
+  }
 }
 
 for (const program of washPrograms) {
   programField.add(new Option(program.name + ' - ' + programPrice(program), program.id));
 }
-const initialProgram = findWashProgram(new URLSearchParams(location.search).get('program'));
-if (initialProgram) programField.value = initialProgram.id;
-
+if (preset) programField.value = preset.id;
 programField.addEventListener('change', refreshTimes);
 dateField.addEventListener('change', refreshTimes);
 timeField.addEventListener('change', updateVisit);
-window.addEventListener('pageshow', refreshTimes);
-window.addEventListener('focus', refreshTimes);
+retryTimes.addEventListener('click', refreshTimes);
+bookingForm.addEventListener('submit', submitBooking);
 bookingForm.addEventListener('reset', () => queueMicrotask(refreshTimes));
-bookingForm.addEventListener('submit', event => {
-  event.preventDefault();
-  refreshTimes();
-  if (!validateContactForm(bookingForm)) return;
-
-  const program = findWashProgram(programField.value);
-  document.getElementById('confirmation-summary').textContent =
-    program.name + ' · ' + visitTimeLabel() + ' · ' + program.minutes + ' минут · ' + programPrice(program);
-  bookingForm.reset();
-  bootstrap.Modal.getOrCreateInstance(confirmation).show();
+confirmation.addEventListener('hidden.bs.modal', () => {
+  if (location.hash === '#requests') document.getElementById('requests-title').focus();
+  else programField.focus();
 });
-confirmation.addEventListener('hidden.bs.modal', () => programField.focus());
-
-refreshTimes();
 prepareContactForm(bookingForm);

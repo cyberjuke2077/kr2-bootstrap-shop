@@ -3,160 +3,204 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Учебная запись на автомойку «Пена». Выбор программы, даты и времени.">
+  <meta name="theme-color" content="#123b3c">
+  <meta name="description" content="Выбор программы, даты и времени мойки. Сохранение визита и запросов на обратный звонок.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:title" content="Запись на мойку - Пена">
+  <meta property="og:description" content="Выбор программы, даты и времени мойки. Сохранение визита и запросов на обратный звонок.">
   <title>Запись на мойку - Пена</title>
   <link rel="icon" href="images/drop.svg" type="image/svg+xml">
   <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="css/custom.css">
 </head>
 <body>
-  <a class="btn btn-light visually-hidden-focusable position-absolute top-0 start-0 z-3 m-2" href="#main-content">К содержимому</a>
-  <header id="top" class="container-fluid px-0 site-header" data-bs-theme="dark">
-    <nav class="navbar navbar-expand-md py-3" aria-label="Основная навигация">
+  <a class="skip-link visually-hidden-focusable" href="#main-content">К содержимому</a>
+  <header id="top" class="site-header container-fluid px-0">
+    <nav class="navbar navbar-expand-md" aria-label="Основная навигация">
       <div class="container">
-        <a class="navbar-brand wordmark d-inline-flex align-items-center gap-2 py-0" href="index.html" aria-label="Пена, главная страница">
-          <img src="images/drop.svg" alt="" width="34" height="38">
-          Пена
+        <a class="navbar-brand wordmark" href="index.html" aria-label="Пена, главная страница">
+          <img src="images/drop.svg" alt="" width="36" height="38">Пена
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#site-menu"
-                aria-controls="site-menu" aria-expanded="false" aria-label="Меню разделов">
-          <span class="navbar-toggler-icon"></span>
-        </button>
+                aria-controls="site-menu" aria-expanded="false" aria-label="Меню разделов"><span class="navbar-toggler-icon"></span></button>
         <div id="site-menu" class="collapse navbar-collapse">
-          <ul class="navbar-nav mx-md-auto gap-md-3 pt-3 pt-md-0">
+          <ul class="navbar-nav mx-md-auto gap-md-2 gap-lg-3">
             <li class="nav-item"><a class="nav-link" href="index.html">Главная</a></li>
             <li class="nav-item"><a class="nav-link" href="catalog.html">Программы</a></li>
-            <li class="nav-item"><a class="nav-link active" aria-current="page" href="order.html">Запись</a></li>
             <li class="nav-item"><a class="nav-link" href="#contacts">Контакты</a></li>
+            <li class="nav-item"><a class="nav-link" id="nav-requests" href="order.html#requests">Мои заявки</a></li>
           </ul>
-          <span class="navbar-text small d-none d-md-inline">Ежедневно, 08:00-22:00</span>
+          <a class="btn btn-primary nav-booking" id="nav-booking" href="order.html" aria-current="page">Записаться</a>
         </div>
       </div>
     </nav>
   </header>
 
-  <main id="main-content" class="container my-5" tabindex="-1">
-    <h1 class="section-title fw-bold mb-3">Запись на мойку</h1>
-    <p class="alert alert-info mb-4">Учебная форма. Используйте вымышленные контакты. Подтверждение появится только в вашем браузере.</p>
-    <noscript><p class="alert alert-warning">Для выбора времени и проверки заявки включите JavaScript.</p></noscript>
-    <div class="row g-4 align-items-start">
-      <div class="col-12 col-lg-8">
-        <form id="booking-form" class="card program p-3 p-md-4" method="post">
-          <fieldset class="mb-4">
-            <legend class="h4 fw-bold mb-3">Программа и время</legend>
-            <div class="row g-3">
-              <div class="col-12">
-                <label for="booking-program" class="form-label">Программа</label>
-                <select id="booking-program" name="program" class="form-select" required aria-describedby="booking-program-error">
-                  <option value="">Выберите программу</option>
-                </select>
-                <div id="booking-program-error" class="invalid-feedback">Выберите программу мойки.</div>
+  <main id="main-content" class="container page-space" tabindex="-1">
+    <noscript><p class="alert alert-info">Для выбора времени включите JavaScript или <a href="tel:+79858717598">позвоните в автомойку</a>.</p></noscript>
+    <section id="booking-panel" aria-labelledby="booking-title">
+      <div class="page-intro"><h1 id="booking-title" tabindex="-1">Запись на мойку</h1><p>Сохраните удобное время. Для подтверждения визита передайте заявку администратору по SMS или телефону.</p></div>
+      <div class="row g-4 gx-xl-5 align-items-start">
+        <div class="col-12 col-lg-8">
+          <form id="booking-form" class="booking-card" method="post">
+            <fieldset>
+              <legend>Программа и время</legend>
+              <div class="row g-3">
+                <div class="col-12">
+                  <label for="booking-program" class="form-label">Программа</label>
+                  <select id="booking-program" name="program" class="form-select" required aria-describedby="booking-program-error"><option value="">Выберите программу</option></select>
+                  <div id="booking-program-error" class="invalid-feedback">Выберите программу мойки.</div>
+                </div>
+                <div class="col-12 col-md-6">
+                  <label for="booking-date" class="form-label">Дата визита</label>
+                  <input id="booking-date" name="date" type="date" class="form-control" required aria-describedby="booking-date-error">
+                  <div id="booking-date-error" class="invalid-feedback">Выберите сегодняшнюю или будущую дату.</div>
+                </div>
+                <div class="col-12 col-md-6">
+                  <label for="booking-time" class="form-label">Начало по Москве</label>
+                  <select id="booking-time" name="time" class="form-select" required disabled aria-describedby="booking-time-hint booking-time-error"><option value="">Выберите время</option></select>
+                  <div id="booking-time-error" class="invalid-feedback">Выберите время начала.</div>
+                  <div id="booking-time-hint" class="form-text" aria-live="polite">Сначала выберите программу и дату.</div>
+                  <button id="retry-times" class="btn btn-link px-0" type="button" hidden>Повторить проверку</button>
+                </div>
               </div>
-              <div class="col-12 col-md-6">
-                <label for="booking-date" class="form-label">Дата</label>
-                <input id="booking-date" name="date" type="date" class="form-control" required aria-describedby="booking-date-error">
-                <div id="booking-date-error" class="invalid-feedback">Выберите сегодняшнюю или будущую дату.</div>
-              </div>
-              <div class="col-12 col-md-6">
-                <label for="booking-time" class="form-label">Время начала (МСК)</label>
-                <select id="booking-time" name="time" class="form-select" required disabled aria-describedby="booking-time-hint booking-time-error">
-                  <option value="">Выберите время</option>
-                </select>
-                <div id="booking-time-error" class="invalid-feedback">Выберите доступное время.</div>
-                <div id="booking-time-hint" class="form-text" aria-live="polite">Сначала выберите программу и дату.</div>
-              </div>
-            </div>
-          </fieldset>
-
-          <fieldset>
-            <legend class="h4 fw-bold mb-3">Контакты</legend>
-            <div class="row g-3">
+            </fieldset>
+            <fieldset>
+              <legend>Контакты</legend>
+              <div class="row g-3">
               <div class="col-12 col-md-6">
                 <label for="booking-name" class="form-label">Имя</label>
-                <input id="booking-name" class="form-control" name="name" type="text" autocomplete="given-name" minlength="2" maxlength="80" required aria-describedby="booking-name-error">
+                <input id="booking-name" name="name" class="form-control" autocomplete="given-name" minlength="2" maxlength="80" required aria-describedby="booking-name-error">
                 <div id="booking-name-error" class="invalid-feedback">Введите имя хотя бы из двух символов.</div>
               </div>
               <div class="col-12 col-md-6">
-                <label for="booking-phone" class="form-label">Телефон</label>
+                <label for="booking-phone" class="form-label">Телефон для связи</label>
                 <div class="input-group has-validation">
                   <span class="input-group-text">+7</span>
-                  <input id="booking-phone" class="form-control" name="phone" type="tel" autocomplete="tel-national" placeholder="900 123-45-67"
-                         pattern="[0-9]{10}" maxlength="25" required aria-describedby="booking-phone-error">
+                  <input id="booking-phone" name="phone" class="form-control" type="tel" autocomplete="tel-national" placeholder="900 123-45-67" maxlength="25" required aria-describedby="booking-phone-error">
                   <div id="booking-phone-error" class="invalid-feedback">Введите 10 цифр после +7.</div>
                 </div>
               </div>
-              <div class="col-12">
-                <label for="booking-email" class="form-label">Электронная почта</label>
-                <input id="booking-email" name="email" type="email" class="form-control" autocomplete="email" required aria-describedby="booking-email-error">
-                <div id="booking-email-error" class="invalid-feedback">Введите адрес электронной почты, например name@example.com.</div>
-              </div>
-              <div class="col-12">
-                <label for="booking-comment" class="form-label">Комментарий <span class="text-body-secondary">(по желанию)</span></label>
-                <textarea id="booking-comment" name="comment" class="form-control" rows="2" maxlength="500"></textarea>
-              </div>
-              <div class="col-12">
-                <div class="form-check">
-                  <input id="booking-consent" name="consent" type="checkbox" class="form-check-input" required aria-describedby="booking-consent-error">
-                  <label class="form-check-label" for="booking-consent">Согласен на обработку данных для этой заявки</label>
-                  <div id="booking-consent-error" class="invalid-feedback">Подтвердите согласие для оформления заявки.</div>
+                <div class="col-12">
+                  <label for="booking-email" class="form-label">Электронная почта <span>(по желанию)</span></label>
+                  <input id="booking-email" name="email" type="email" class="form-control" autocomplete="email" maxlength="254" aria-describedby="booking-email-error">
+                  <div id="booking-email-error" class="invalid-feedback">Проверьте адрес электронной почты.</div>
+                </div>
+                <div class="col-12">
+                  <label for="booking-comment" class="form-label">Пожелания мастеру <span>(по желанию)</span></label>
+                  <textarea id="booking-comment" name="comment" rows="2" maxlength="500" class="form-control" placeholder="Например, уделить внимание передним коврикам"></textarea>
                 </div>
               </div>
+            </fieldset>
+            <div class="form-check">
+              <input id="booking-consent" name="consent" type="checkbox" class="form-check-input" required aria-describedby="booking-consent-error">
+              <label class="form-check-label" for="booking-consent">Согласен сохранить контакты для этой заявки в этом браузере</label>
+              <div id="booking-consent-error" class="invalid-feedback">Подтвердите сохранение контактов.</div>
             </div>
-          </fieldset>
-          <div class="d-flex flex-wrap gap-2 mt-4">
-            <button class="btn btn-primary" type="submit" disabled>Подтвердить запись</button>
-            <button class="btn btn-outline-secondary" type="reset">Очистить форму</button>
-          </div>
-        </form>
-      </div>
-
-      <aside class="col-12 col-lg-4" aria-labelledby="visit-title">
-        <div class="visit-panel p-4 rounded-4">
-          <h2 id="visit-title" class="h4 fw-bold mb-3">Ваш визит</h2>
-          <div aria-live="polite" aria-atomic="true">
-            <p id="visit-program" class="fw-semibold mb-2">Выберите программу</p>
-            <p id="visit-time" class="mb-0">Дата и время появятся после выбора.</p>
-          </div>
-          <hr>
-          <p class="mb-0">Москва, Учебный проезд, 8<br>Ежедневно, 08:00-22:00</p>
+            <p id="booking-error" class="alert alert-warning mt-3 mb-0" role="alert" tabindex="-1" hidden></p>
+            <div class="form-actions"><button class="btn btn-primary" type="submit" disabled>Сохранить запись</button></div>
+          </form>
         </div>
-      </aside>
-    </div>
+        <aside class="col-12 col-lg-4 visit-aside" aria-labelledby="visit-title">
+          <div class="visit-panel">
+            <h2 id="visit-title">Ваш визит</h2>
+            <p id="visit-program" class="visit-program">Выберите программу</p>
+            <dl class="summary-list" aria-live="polite" aria-atomic="true">
+              <div><dt>Дата и время</dt><dd id="visit-time">Пока не выбраны</dd></div>
+              <div><dt>Длительность</dt><dd id="visit-duration">Уточняется</dd></div>
+              <div class="summary-total"><dt>Стоимость</dt><dd id="visit-price">По программе</dd></div>
+            </dl>
+            <address>Проспект Вернадского, 78<br><small>Ежедневно, 08:00-22:00</small></address>
+          </div>
+          <a class="aside-history" href="#requests">Посмотреть мои заявки <span aria-hidden="true">→</span></a>
+        </aside>
+      </div>
+    </section>
+
+    <section id="requests-panel" aria-labelledby="requests-title" hidden>
+      <div class="section-heading history-heading">
+        <div><h1 id="requests-title" tabindex="-1">Мои заявки</h1><p>Записи и запросы на звонок, сохранённые в этом браузере.</p></div>
+        <a class="btn btn-primary" href="#booking">Новая запись</a>
+      </div>
+      <p id="requests-status" class="visually-hidden" role="status"></p>
+      <div id="requests-list" aria-busy="true"></div>
+    </section>
   </main>
 
-  <div class="modal fade" id="confirmation-modal" tabindex="-1" aria-labelledby="confirmation-title" aria-describedby="confirmation-summary" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h2 id="confirmation-title" class="modal-title h4 fw-bold">Учебная запись оформлена</h2>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
-        </div>
-        <div class="modal-body"><p id="confirmation-summary" class="mb-0"></p></div>
-        <div class="modal-footer"><button type="button" class="btn btn-primary" data-bs-dismiss="modal">Готово</button></div>
+  <div class="modal fade" id="callback-modal" tabindex="-1" aria-labelledby="callback-title" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable"><div class="modal-content">
+      <div class="modal-header"><h2 id="callback-title" class="modal-title h4">Обратный звонок</h2><button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Закрыть"></button></div>
+      <div class="modal-body">
+        <form id="callback-form" method="post">
+          <p class="form-intro">Сохраните запрос, затем передайте его по SMS на номер мойки.</p>
+          <div class="row g-3 mb-3">
+            <div class="col-12"><label class="form-label" for="callback-program">Программа</label>
+              <select id="callback-program" class="form-select" name="program"><option value="">Нужна помощь с выбором</option></select>
+            </div>
+              <div class="col-12">
+                <label for="callback-name" class="form-label">Имя</label>
+                <input id="callback-name" name="name" class="form-control" autocomplete="given-name" minlength="2" maxlength="80" required aria-describedby="callback-name-error">
+                <div id="callback-name-error" class="invalid-feedback">Введите имя хотя бы из двух символов.</div>
+              </div>
+              <div class="col-12">
+                <label for="callback-phone" class="form-label">Телефон для связи</label>
+                <div class="input-group has-validation">
+                  <span class="input-group-text">+7</span>
+                  <input id="callback-phone" name="phone" class="form-control" type="tel" autocomplete="tel-national" placeholder="900 123-45-67" maxlength="25" required aria-describedby="callback-phone-error">
+                  <div id="callback-phone-error" class="invalid-feedback">Введите 10 цифр после +7.</div>
+                </div>
+              </div>
+          </div>
+            <div class="form-check">
+              <input id="callback-consent" name="consent" type="checkbox" class="form-check-input" required aria-describedby="callback-consent-error">
+              <label class="form-check-label" for="callback-consent">Согласен сохранить контакты для этой заявки в этом браузере</label>
+              <div id="callback-consent-error" class="invalid-feedback">Подтвердите сохранение контактов.</div>
+            </div>
+          <p id="callback-error" class="alert alert-warning mt-3 mb-0" role="alert" tabindex="-1" hidden></p>
+          <button class="btn btn-primary mt-4" type="submit" disabled>Сохранить запрос</button>
+        </form>
+        <div id="callback-success" tabindex="-1" hidden></div>
       </div>
-    </div>
+    </div></div>
   </div>
 
-  <footer id="contacts" class="site-footer py-5" aria-labelledby="contacts-title">
+  <div class="modal fade" id="confirmation-modal" tabindex="-1" aria-labelledby="confirmation-title" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable"><div class="modal-content">
+      <div class="modal-header"><h2 id="confirmation-title" class="modal-title h4">Запись сохранена</h2><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button></div>
+      <div class="modal-body" id="confirmation-summary"></div>
+      <div class="modal-footer"><button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Закрыть</button></div>
+    </div></div>
+  </div>
+
+  <footer id="contacts" class="site-footer" aria-labelledby="contacts-title">
     <div class="container">
-      <div class="row g-3 align-items-start">
-        <div class="col-12 col-md-4"><h2 id="contacts-title" class="h3 fw-bold mb-0">Как нас найти</h2></div>
-        <div class="col-12 col-sm-6 col-md-4">
-          <h3 class="h6">Адрес</h3>
-          <address class="mb-0">Москва, Учебный проезд, 8</address>
-        </div>
-        <div class="col-12 col-sm-6 col-md-4">
-          <h3 class="h6">Часы работы</h3>
+      <div class="row g-4 align-items-start">
+        <div class="col-12 col-md-4">
+          <h2 id="contacts-title" class="h3 mb-2">Как нас найти</h2>
           <p class="mb-0">Ежедневно, 08:00-22:00</p>
         </div>
+        <div class="col-12 col-sm-6 col-md-4">
+          <h3 class="footer-label">Адрес</h3>
+          <address class="mb-2">Москва, проспект Вернадского, 78</address>
+          <a href="https://yandex.ru/maps/213/moscow/?text=%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C%20%D0%BF%D1%80%D0%BE%D1%81%D0%BF%D0%B5%D0%BA%D1%82%20%D0%92%D0%B5%D1%80%D0%BD%D0%B0%D0%B4%D1%81%D0%BA%D0%BE%D0%B3%D0%BE%2C%2078" target="_blank" rel="noopener noreferrer">Открыть в Яндекс Картах <span aria-hidden="true">↗</span></a>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4">
+          <h3 class="footer-label">Связаться с мойкой</h3>
+          <a class="footer-phone" href="tel:+79858717598">+7 (985) 871-75-98</a>
+          <a class="d-block mt-2" href="order.html#callback">Заказать обратный звонок</a>
+        </div>
       </div>
-      <p class="footer-note small pt-3 mt-4 mb-0">«Пена» - учебный проект. Адрес, расписание и цены условные.</p>
     </div>
   </footer>
 
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="js/navigation.js"></script>
   <script src="js/programs.js"></script>
   <script src="js/validation.js"></script>
+  <script src="js/requests.js"></script>
+  <script src="js/request-view.js"></script>
   <script src="js/order.js"></script>
+  <script src="js/callback.js"></script>
 </body>
 </html>
