@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Учебный сайт автомойки «Пена». Сравните три программы ручной мойки автомобиля по составу, цене и длительности.">
+  <title>Пена - ручная мойка автомобилей</title>
+  <link rel="icon" href="images/drop.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/custom.css">
+</head>
+<body>
+  <a class="btn btn-light visually-hidden-focusable position-absolute top-0 start-0 z-3 m-2" href="#main-content">К содержимому</a>
+  <header id="top" class="container-fluid px-0 site-header" data-bs-theme="dark">
+    <nav class="navbar navbar-expand-md py-3" aria-label="Основная навигация">
+      <div class="container">
+        <a class="navbar-brand wordmark d-inline-flex align-items-center gap-2 py-0" href="#top" aria-label="Пена, в начало страницы">
+          <img src="images/drop.svg" alt="" width="34" height="38">
+          Пена
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#site-menu"
+                aria-controls="site-menu" aria-expanded="false" aria-label="Меню разделов">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div id="site-menu" class="collapse navbar-collapse">
+          <ul class="navbar-nav mx-md-auto gap-md-3 pt-3 pt-md-0">
+            <li class="nav-item"><a class="nav-link" href="#programs">Программы</a></li>
+            <li class="nav-item"><a class="nav-link" href="#about">О мойке</a></li>
+            <li class="nav-item"><a class="nav-link" href="#contacts">Контакты</a></li>
+          </ul>
+          <span class="navbar-text small d-none d-md-inline">Ежедневно, 08:00-22:00</span>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main-content" tabindex="-1">
+    <section class="hero py-4 py-md-5" aria-labelledby="hero-title">
+      <div class="container">
+        <div class="row g-4 g-lg-5 align-items-center">
+          <div class="col-12 col-md-6 col-lg-5">
+            <h1 id="hero-title" class="hero-title fw-bold mb-3">Ручная мойка <span class="d-block">в Москве</span></h1>
+            <p class="hero-description mb-4">Помоем кузов, уберём салон или сделаем всё за один визит. Экспресс-мойка занимает 20 минут.</p>
+            <a class="btn wash-button fw-semibold px-4 py-2" href="#programs">Выбрать мойку <span aria-hidden="true">↓</span></a>
+          </div>
+          <div class="col-12 col-md-6 col-lg-7">
+            <img class="hero-photo img-fluid w-100 rounded-4" src="images/car-wash.webp" width="1120" height="840"
+                 alt="Белая пена стекает по капоту тёмно-бирюзового автомобиля в моечном боксе" fetchpriority="high">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="programs" class="container my-5" aria-labelledby="programs-title">
+      <h2 id="programs-title" class="section-title fw-bold mb-4">Программы мойки</h2>
+      <div class="row g-3 g-lg-4">
+        <div class="col-12 col-md-6 col-lg-4">
+          <article class="card program h-100 p-4">
+            <p class="duration mb-2">20 минут</p>
+            <h3 class="h4 fw-bold mb-2">Экспресс-мойка</h3>
+            <p class="text-body-secondary mb-4">Смываем дорожную грязь с кузова и колёс, затем сушим кузов микрофиброй.</p>
+            <p class="price mt-auto mb-0 pt-3">650&nbsp;₽</p>
+          </article>
+        </div>
+        <div class="col-12 col-md-6 col-lg-4">
+          <article class="card program h-100 p-4">
+            <p class="duration mb-2">35 минут</p>
+            <h3 class="h4 fw-bold mb-2">Уборка салона</h3>
+            <p class="text-body-secondary mb-4">Пылесосим сиденья и пол, моем коврики и протираем переднюю панель.</p>
+            <p class="price mt-auto mb-0 pt-3">1&nbsp;000&nbsp;₽</p>
+          </article>
+        </div>
+        <div class="col-12 col-md-6 col-lg-4">
+          <article class="card program h-100 p-4">
+            <p class="duration mb-2">55 минут</p>
+            <h3 class="h4 fw-bold mb-2">Комплексная мойка</h3>
+            <p class="text-body-secondary mb-4">Моем кузов и колёса, убираем салон и очищаем стёкла изнутри.</p>
+            <p class="price mt-auto mb-0 pt-3">1&nbsp;500&nbsp;₽</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="about py-5" aria-labelledby="about-title">
+      <div class="container">
+        <h2 id="about-title" class="section-title fw-bold mb-4">О мойке</h2>
+        <div class="row g-4">
+          <div class="col-12 col-md-4">
+            <h3 class="h5 fw-bold">Ручная сушка</h3>
+            <p class="mb-0">Для стёкол и кузова берём отдельные салфетки из микрофибры.</p>
+          </div>
+          <div class="col-12 col-md-4">
+            <h3 class="h5 fw-bold">Цена до начала работ</h3>
+            <p class="mb-0">Вы видите стоимость каждой программы заранее. Дополнительные работы согласуем отдельно.</p>
+          </div>
+          <div class="col-12 col-md-4">
+            <h3 class="h5 fw-bold">Место для ожидания</h3>
+            <p class="mb-0">За мойкой можно наблюдать через окно из тёплой комнаты с Wi-Fi.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="contacts" class="site-footer py-5" aria-labelledby="contacts-title">
+    <div class="container">
+      <div class="row g-3 align-items-start">
+        <div class="col-12 col-md-4"><h2 id="contacts-title" class="h3 fw-bold mb-0">Как нас найти</h2></div>
+        <div class="col-12 col-sm-6 col-md-4">
+          <h3 class="h6">Адрес</h3>
+          <address class="mb-0">Москва, Учебный проезд, 8</address>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4">
+          <h3 class="h6">Часы работы</h3>
+          <p class="mb-0">Ежедневно, 08:00-22:00</p>
+        </div>
+      </div>
+      <p class="footer-note small pt-3 mt-4 mb-0">«Пена» - учебный проект. Адрес, расписание и цены условные.</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+</body>
+</html>
