@@ -1,9 +1,20 @@
 'use strict';
 
+const washWorkItems = [
+  { id: 'body', name: 'Кузов и стёкла снаружи' },
+  { id: 'wheels', name: 'Очистка дисков' },
+  { id: 'drying', name: 'Ручная сушка' },
+  { id: 'seats', name: 'Пылесос сидений и пола' },
+  { id: 'mats', name: 'Очистка ковриков' },
+  { id: 'surfaces', name: 'Панель и двери' },
+  { id: 'windows', name: 'Стёкла изнутри' }
+];
+
 const washPrograms = [
   {
     id: 'express', name: 'Экспресс-мойка', category: 'Кузов',
     price: 650, minutes: 20, image: 'images/car-wash.webp',
+    work: ['body', 'wheels', 'drying'],
     alt: 'Активная пена на капоте и лобовом стекле автомобиля',
     processPhoto: {
       file: 'wheel-care',
@@ -20,6 +31,7 @@ const washPrograms = [
   {
     id: 'interior', name: 'Уборка салона', category: 'Салон',
     price: 1000, minutes: 35, image: 'images/interior.webp',
+    work: ['seats', 'mats', 'surfaces'],
     alt: 'Мастер чистит пылесосом тканевое сиденье автомобиля',
     processPhoto: {
       file: 'cabin-care',
@@ -36,6 +48,7 @@ const washPrograms = [
   {
     id: 'complete', name: 'Комплексная мойка', category: 'Кузов и салон',
     price: 1500, minutes: 55, image: 'images/complete.webp',
+    work: ['body', 'wheels', 'drying', 'seats', 'mats', 'surfaces', 'windows'],
     alt: 'Чистый тёмно-бирюзовый седан в светлом боксе автомойки',
     processPhoto: {
       file: 'hand-drying',

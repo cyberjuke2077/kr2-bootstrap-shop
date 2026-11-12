@@ -29,6 +29,18 @@
 }
 
 body { line-height: 1.55; }
+
+.feature-section { margin-top: clamp(3rem, 6vw, 5.5rem); scroll-margin-top: 6rem; }
+.feature-eyebrow { color: var(--pine); font-size: .8rem; font-weight: 550; letter-spacing: .09em; text-transform: uppercase; }
+.feature-note { color: var(--muted); max-width: 34ch; margin-bottom: 0; }
+.comparison-scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: .75rem; }
+.comparison-table { --bs-table-bg: white; margin: 0; min-width: 690px; }
+.comparison-table th, .comparison-table td { padding: 1rem 1.15rem; vertical-align: middle; }
+.comparison-table thead th { background: var(--ink); color: white; font-weight: 550; width: 25%; }
+.comparison-table tbody th, .comparison-table tfoot th { font-weight: 450; }
+.comparison-table tr > :first-child { position: sticky; left: 0; z-index: 1; }
+.comparison-table tbody tr:nth-child(-n+2) > * { background: var(--soft); font-weight: 550; }
+.comparison-table tfoot > tr > * { border-bottom: 0; }
 [hidden] { display: none !important; }
 h1, h2, h3, p { overflow-wrap: break-word; }
 h1, h2, h3, .modal-title, legend { font-weight: 600; }

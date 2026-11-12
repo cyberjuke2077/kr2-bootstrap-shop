@@ -38,7 +38,9 @@
   </header>
 
   <main id="main-content" tabindex="-1" class="container page-space">
-    <div class="page-intro"><h1>Программы и цены</h1><p>Цены за один легковой автомобиль. Выберите программу, чтобы увидеть этапы работы и подобрать время.</p></div>
+    <div class="page-intro"><h1>Программы и цены</h1><p>Цены за один легковой автомобиль. Выберите программу, чтобы увидеть этапы работы и подобрать время.</p>
+      <a class="text-action d-inline-block mt-3" href="#compare">Сравнить программы ↓</a>
+    </div>
     <div class="row g-3 g-lg-4">
         <div class="col-12 col-md-6 col-lg-4">
           <article class="card catalog-card h-100">
@@ -89,6 +91,18 @@
           </article>
         </div>
     </div>
+    <section id="compare" class="feature-section" aria-labelledby="compare-title">
+      <div class="section-heading">
+        <div><p class="feature-eyebrow">Всё на одной странице</p><h2 id="compare-title">Сравните программы</h2></div>
+        <p id="compare-hint" class="feature-note">Три варианта ухода. На телефоне таблицу можно прокрутить вбок.</p>
+      </div>
+      <div class="comparison-scroll" role="region" aria-labelledby="compare-title" aria-describedby="compare-hint" tabindex="0">
+        <table id="program-comparison" class="table comparison-table">
+          <caption class="visually-hidden">Стоимость, длительность и состав трёх программ мойки</caption>
+        </table>
+      </div>
+      <noscript><p>Для таблицы сравнения включите JavaScript. Цены и состав программ доступны в карточках выше.</p></noscript>
+    </section>
     <section class="faq-section" aria-labelledby="faq-title">
       <div class="row gy-3 gx-lg-5">
         <div class="col-12 col-md-4"><h2 id="faq-title">Перед визитом</h2></div>
@@ -135,5 +149,7 @@
 
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="js/navigation.js"></script>
+  <script src="js/programs.js"></script>
+  <script src="js/comparison.js"></script>
 </body>
 </html>
