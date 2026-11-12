@@ -12,7 +12,7 @@
   <title>Состав программы - автомойка «Пена»</title>
   <link rel="icon" href="images/drop.svg" type="image/svg+xml">
   <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
-  <link rel="stylesheet" href="css/custom.css">
+  <link rel="stylesheet" href="css/custom.css?v=690500c0d4">
 </head>
 <body>
   <a class="skip-link visually-hidden-focusable" href="#main-content">К содержимому</a>
@@ -75,22 +75,32 @@
   </main>
 
   <footer id="contacts" class="site-footer" aria-labelledby="contacts-title">
-    <div class="container">
-      <div class="row g-4 align-items-start">
-        <div class="col-12 col-md-4 footer-column">
-          <h2 id="contacts-title" class="footer-label">Как нас найти</h2>
-          <p>Ежедневно, 08:00-22:00</p>
-        </div>
-        <div class="col-12 col-sm-6 col-md-4 footer-column">
-          <h3 class="footer-label">Адрес</h3>
-          <address>Москва, проспект Вернадского, 78</address>
-          <a href="https://yandex.ru/maps/213/moscow/?text=%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C%20%D0%BF%D1%80%D0%BE%D1%81%D0%BF%D0%B5%D0%BA%D1%82%20%D0%92%D0%B5%D1%80%D0%BD%D0%B0%D0%B4%D1%81%D0%BA%D0%BE%D0%B3%D0%BE%2C%2078" target="_blank" rel="noopener noreferrer">Открыть в Яндекс Картах <span aria-hidden="true">↗</span></a>
-        </div>
-        <div class="col-12 col-sm-6 col-md-4 footer-column">
-          <h3 class="footer-label">Связаться с мойкой</h3>
-          <a href="tel:+79858717598">+7 (985) 871-75-98</a>
-          <a href="order.html#callback">Заказать обратный звонок</a>
-        </div>
+    <h2 id="contacts-title" class="visually-hidden">Контакты и разделы автомойки «Пена»</h2>
+    <div class="container footer-layout">
+      <div class="footer-about">
+        <a class="footer-brand" href="index.html" aria-label="Пена, главная страница">
+          <span class="footer-brand-mark"><img src="images/drop.svg" width="23" height="25" alt=""></span>
+          <span>Пена</span>
+        </a>
+        <p class="footer-description">Ручная автомойка в Москве</p>
+        <p class="footer-copyright">© 2026 Пена. Все права защищены.</p>
+      </div>
+      <nav class="footer-nav" aria-label="Разделы внизу страницы">
+        <a href="catalog.html">Программы и цены</a>
+        <a href="order.html#requests">Мои заявки</a>
+        <a href="index.html#about">Как проходит мойка</a>
+      </nav>
+      <div class="footer-contacts">
+        <address class="footer-contact-details">
+          <a class="footer-contact-line footer-address" href="https://yandex.ru/maps/213/moscow/?text=%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C%20%D0%BF%D1%80%D0%BE%D1%81%D0%BF%D0%B5%D0%BA%D1%82%20%D0%92%D0%B5%D1%80%D0%BD%D0%B0%D0%B4%D1%81%D0%BA%D0%BE%D0%B3%D0%BE%2C%2078" target="_blank" rel="noopener noreferrer">
+            <svg class="footer-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 10c0 5-7 11-7 11S5 15 5 10a7 7 0 1 1 14 0Z"/><circle cx="12" cy="10" r="2.5"/></svg><span>Москва, проспект Вернадского, 78</span>
+          </a>
+          <a class="footer-contact-line footer-telephone" href="tel:+79858717598">
+            <svg class="footer-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 3 2 5-3 2a16 16 0 0 0 7 7l2-3 5 2v3a2 2 0 0 1-2 2A18 18 0 0 1 3 5a2 2 0 0 1 2-2Z"/></svg><span>+7 (985) 871-75-98</span>
+          </a>
+          <span class="footer-contact-line footer-hours"><svg class="footer-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>Ежедневно, 08:00-22:00</span></span>
+        </address>
+        <a class="btn footer-booking" href="order.html"><svg class="footer-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 11h18m-12 5 2 2 4-4"/></svg><span>Онлайн-запись</span></a>
       </div>
     </div>
   </footer>
