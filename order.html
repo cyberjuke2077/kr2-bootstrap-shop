@@ -45,13 +45,23 @@
         <div class="col-12 col-lg-8">
           <form id="booking-form" class="booking-card" method="post">
             <fieldset>
-              <legend>Программа и время</legend>
+              <legend>Программа</legend>
               <div class="row g-3">
                 <div class="col-12">
                   <label for="booking-program" class="form-label">Программа</label>
                   <select id="booking-program" name="program" class="form-select" required aria-describedby="booking-program-error"><option value="">Выберите программу</option></select>
                   <div id="booking-program-error" class="invalid-feedback">Выберите программу мойки.</div>
                 </div>
+              </div>
+            </fieldset>
+            <fieldset>
+              <legend>Дополнительный уход <span class="optional-label">по желанию</span></legend>
+              <div id="extra-options" class="extra-options"></div>
+              <p class="form-text mb-0">Выберите программу, затем добавьте услуги. Их стоимость и время войдут в итог визита.</p>
+            </fieldset>
+            <fieldset>
+              <legend>Дата и время</legend>
+              <div class="row g-3">
                 <div class="col-12 col-md-6">
                   <label for="booking-date" class="form-label">Дата визита</label>
                   <input id="booking-date" name="date" type="date" class="form-control" required aria-describedby="booking-date-error">
@@ -106,9 +116,11 @@
           <div class="visit-panel">
             <h2 id="visit-title">Ваш визит</h2>
             <p id="visit-program" class="visit-program">Выберите программу</p>
+            <ul id="visit-extras" class="visit-extras" hidden aria-live="polite"></ul>
             <dl class="summary-list" aria-live="polite" aria-atomic="true">
               <div><dt>Дата и время</dt><dd id="visit-time">Пока не выбраны</dd></div>
               <div><dt>Длительность</dt><dd id="visit-duration">Уточняется</dd></div>
+              <div><dt>Машина готова</dt><dd id="visit-finish">Выберите начало</dd></div>
               <div class="summary-total"><dt>Стоимость</dt><dd id="visit-price">По программе</dd></div>
             </dl>
             <address>Проспект Вернадского, 78<br><small>Ежедневно, 08:00-22:00</small></address>
@@ -200,6 +212,7 @@
   <script src="js/validation.js"></script>
   <script src="js/requests.js"></script>
   <script src="js/request-view.js"></script>
+  <script src="js/booking-extras.js"></script>
   <script src="js/order.js"></script>
   <script src="js/callback.js"></script>
 </body>

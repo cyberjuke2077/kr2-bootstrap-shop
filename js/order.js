@@ -7,15 +7,26 @@ const timeField = bookingForm.elements.namedItem('time');
 const bookingError = document.getElementById('booking-error');
 const confirmation = document.getElementById('confirmation-modal');
 const retryTimes = document.getElementById('retry-times');
+const extraOptions = document.getElementById('extra-options');
 const preset = findWashProgram(new URLSearchParams(location.search).get('program'));
 let timesRevision = 0;
 let savingBooking = false;
 
-function updateVisit() {
+function selectedVisit() {
   const program = findWashProgram(programField.value);
+  const extras = Array.from(extraOptions.querySelectorAll('input:checked'), input => input.value);
+  return program ? quoteVisit(program, extras) : undefined;
+}
+
+function updateVisit() {
+  const program = selectedVisit();
   document.getElementById('visit-program').textContent = program?.name || 'Выберите программу';
   document.getElementById('visit-duration').textContent = program ? program.minutes + ' минут' : 'По программе';
   document.getElementById('visit-price').textContent = program ? programPrice(program) : 'По программе';
+  showVisitExtras(document.getElementById('visit-extras'), program?.extras || []);
+  const [hours, minutes] = timeField.value.split(':').map(Number);
+  document.getElementById('visit-finish').textContent = program && timeField.value
+    ? clockLabel(hours * 60 + minutes + program.minutes) + ' (МСК)' : 'Выберите начало';
   let label = 'Пока не выбраны';
   if (dateField.valueAsDate && !dateField.validity.rangeUnderflow) {
     label = visitDayLabel(dateField.value) + (timeField.value ? ', ' + timeField.value : '');
@@ -45,7 +56,8 @@ function setDateProblem(message = '') {
 
 async function refreshTimes() {
   const revision = ++timesRevision;
-  const program = findWashProgram(programField.value);
+  syncExtraOptions(extraOptions, findWashProgram(programField.value));
+  const program = selectedVisit();
   const day = dateField.value;
   const previous = timeField.value;
   dateField.min = moscowNow().day;
@@ -56,7 +68,7 @@ async function refreshTimes() {
     return;
   }
 
-  timeField.disabled = true;
+  setTimeChoices([], 'Проверяем доступное время…');
   try {
     const bookings = await readRequests(day);
     if (revision !== timesRevision) return;
@@ -84,7 +96,7 @@ async function submitBooking(event) {
   bookingError.hidden = true;
   dateField.min = moscowNow().day;
   if (!validateContactForm(bookingForm)) return;
-  const program = findWashProgram(programField.value);
+  const program = selectedVisit();
   if (!program || timeField.disabled || !timeField.value) {
     showBookingError('Выберите доступное время начала визита.');
     return;
@@ -111,11 +123,13 @@ async function submitBooking(event) {
   }
 }
 
+renderExtraOptions(extraOptions);
 for (const program of washPrograms) {
   programField.add(new Option(program.name + ' - ' + programPrice(program), program.id));
 }
 if (preset) programField.value = preset.id;
 programField.addEventListener('change', refreshTimes);
+extraOptions.addEventListener('change', refreshTimes);
 dateField.addEventListener('change', refreshTimes);
 timeField.addEventListener('change', updateVisit);
 retryTimes.addEventListener('click', refreshTimes);

@@ -68,6 +68,31 @@ function findWashProgram(id) {
   return washPrograms.find(program => program.id === id);
 }
 
+const washExtras = [
+  { id: 'trunk', name: 'Уборка багажника', price: 300, minutes: 15,
+    description: 'Пылесосим обивку и очищаем коврик багажника.' },
+  { id: 'wax', name: 'Обработка кузова воском', price: 400, minutes: 10,
+    requires: 'body', description: 'Наносим защитный воск. Доступно с мойкой кузова.' }
+];
+
+function isExtraAvailable(program, extra) {
+  return Boolean(program && (!extra.requires || program.work.includes(extra.requires)));
+}
+
+function quoteVisit(program, extraIds = []) {
+  const extras = Array.from(new Set(extraIds), id => {
+    const extra = washExtras.find(item => item.id === id);
+    if (!extra) throw new Error('Неизвестная дополнительная услуга: ' + id);
+    if (!isExtraAvailable(program, extra)) throw new Error('Услуга «' + extra.name + '» недоступна для этой программы.');
+    return { id: extra.id, name: extra.name, price: extra.price, minutes: extra.minutes };
+  });
+  return {
+    ...program, extras,
+    price: program.price + extras.reduce((sum, extra) => sum + extra.price, 0),
+    minutes: program.minutes + extras.reduce((sum, extra) => sum + extra.minutes, 0)
+  };
+}
+
 function recommendWashProgram(needs) {
   if (!needs.length) return undefined;
   return washPrograms.filter(program => needs.every(id => program.work.includes(id)))

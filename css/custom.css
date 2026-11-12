@@ -71,6 +71,24 @@ body { line-height: 1.55; }
 .comparison-figure h3 { font-size: 1.25rem; margin-bottom: .35rem; }
 .comparison-figure p { color: var(--muted); margin: 0; }
 .gallery-note { color: var(--muted); font-size: .8rem; margin: 1.25rem 0 0; }
+.optional-label { display: inline-block; color: var(--muted); font-size: .8rem; font-weight: 400; letter-spacing: 0; }
+.extra-options { display: grid; gap: .75rem; }
+.extra-option { display: flex; align-items: flex-start; gap: .8rem; padding: .9rem; border: 1px solid var(--line); border-radius: .5rem; cursor: pointer; }
+.extra-option:has(:checked) { border-color: var(--pine); background: var(--soft); }
+.extra-option:has(:disabled) { background: #f4f5f2; cursor: default; }
+.extra-option .form-check-input { flex-shrink: 0; width: 1.2rem; height: 1.2rem; }
+.extra-description { flex: 1; }
+.extra-description strong { display: block; font-weight: 500; }
+.extra-option small { display: block; color: var(--muted); font-size: .8rem; margin-top: .25rem; }
+.extra-facts { white-space: nowrap; text-align: right; font-weight: 550; font-variant-numeric: tabular-nums; }
+.visit-extras { padding-left: 1.1rem; color: var(--muted); font-size: .9rem; }
+.visit-extras li + li { margin-top: .4rem; }
+@media (max-width: 374.98px) {
+  .extra-option { flex-wrap: wrap; }
+  .extra-description { flex-basis: calc(100% - 2rem); }
+  .extra-facts { margin-left: 2rem; text-align: left; }
+  .extra-facts small { display: inline; margin-left: .5rem; }
+}
 [hidden] { display: none !important; }
 h1, h2, h3, p { overflow-wrap: break-word; }
 h1, h2, h3, .modal-title, legend { font-weight: 600; }

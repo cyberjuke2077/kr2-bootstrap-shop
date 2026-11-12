@@ -25,8 +25,13 @@ function requestMessage(record) {
   const intro = record.kind === 'booking'
     ? 'Хочу согласовать визит: ' + record.programName + ', ' + requestSchedule(record) + ', ' + programPrice(record) + '.'
     : 'Прошу перезвонить' + (record.programName ? ' по программе «' + record.programName + '».' : '.');
-  return intro + ' ' + record.name + ', +7' + record.phone + '.' +
+  return intro + requestOptions(record) + ' ' + record.name + ', +7' + record.phone + '.' +
     (record.comment ? ' Пожелания: ' + record.comment : '');
+}
+
+function requestOptions(record) {
+  return record.extras?.length
+    ? ' Допуслуги: ' + record.extras.map(extra => extra.name + ' (+' + programPrice(extra) + ')').join(', ') + '.' : '';
 }
 
 function textElement(tag, text, className) {
@@ -87,6 +92,7 @@ function showReceipt(container, record) {
     textElement('p', title, 'receipt-lead'), textElement('p', detail),
     handoff, actions
   );
+  if (requestOptions(record)) actions.before(textElement('p', requestOptions(record).trim()));
 }
 
 function historyCard(record) {
@@ -105,6 +111,7 @@ function historyCard(record) {
   card.append(textElement('h2', heading), textElement('p', detail), textElement('p', record.name + ', ' + phone));
   if (record.email) card.append(textElement('p', record.email));
   if (record.comment) card.append(textElement('p', record.comment));
+  if (requestOptions(record)) card.append(textElement('p', requestOptions(record).trim()));
   card.append(actions);
   return card;
 }

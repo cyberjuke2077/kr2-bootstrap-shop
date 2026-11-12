@@ -86,6 +86,7 @@ function createRequest(kind, form, program) {
     id: key, kind, createdAt: new Date().toISOString(),
     programId: program?.id || '', programName: program?.name || '',
     price: program?.price ?? null, minutes: program?.minutes ?? null,
+    extras: program?.extras || [],
     name: values.get('name').trim(), phone: values.get('phone'),
     email: (values.get('email') || '').trim(), comment: (values.get('comment') || '').trim()
   };
