@@ -53,6 +53,24 @@ body { line-height: 1.55; }
 .recommendation-facts { display: flex; align-items: baseline; gap: 1rem; }
 .recommendation-facts strong { font-size: 1.75rem; font-variant-numeric: tabular-nums; }
 @media (max-width: 374.98px) { .condition-options { grid-template-columns: 1fr; } }
+.comparison-figure { margin: 0; }
+.comparison-frame { --reveal: 50%; position: relative; aspect-ratio: 3 / 2; overflow: hidden; border-radius: .35rem; background: var(--soft); }
+.comparison-frame:focus-within { outline: 3px solid var(--pine); outline-offset: 4px; }
+.comparison-photo { position: absolute; top: 0; left: 0; width: 200%; max-width: none; height: 100%; pointer-events: none; }
+.comparison-after { left: -100%; }
+.comparison-before { position: absolute; inset: 0; clip-path: inset(0 calc(100% - var(--reveal)) 0 0); }
+.comparison-badge { position: absolute; top: .75rem; background: rgba(18, 55, 57, .88); color: white; border-radius: .25rem; padding: .2rem .55rem; font-size: .8rem; pointer-events: none; }
+.comparison-badge.before { left: .75rem; }
+.comparison-badge.after { right: .75rem; }
+.comparison-handle { position: absolute; top: 0; bottom: 0; left: var(--reveal); width: 2px; background: white; transform: translateX(-50%); pointer-events: none; }
+.comparison-handle span { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); display: grid; place-items: center; width: 2.75rem; height: 2.75rem; border-radius: 50%; background: white; color: var(--ink); font-size: 1.6rem; box-shadow: 0 2px 12px #12373940; }
+.comparison-range { appearance: none; position: absolute; top: 0; left: -22px; width: calc(100% + 44px); height: 100%; margin: 0; opacity: 0; cursor: ew-resize; touch-action: pan-y; }
+.comparison-range::-webkit-slider-thumb { appearance: none; width: 44px; height: 44px; }
+.comparison-range::-moz-range-thumb { width: 44px; height: 44px; border: 0; }
+.comparison-figure figcaption { margin-top: 1rem; }
+.comparison-figure h3 { font-size: 1.25rem; margin-bottom: .35rem; }
+.comparison-figure p { color: var(--muted); margin: 0; }
+.gallery-note { color: var(--muted); font-size: .8rem; margin: 1.25rem 0 0; }
 [hidden] { display: none !important; }
 h1, h2, h3, p { overflow-wrap: break-word; }
 h1, h2, h3, .modal-title, legend { font-weight: 600; }

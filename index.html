@@ -93,6 +93,53 @@
       </div>
     </section>
 
+    <section id="before-after" class="container section-space" aria-labelledby="gallery-title">
+      <div class="section-heading">
+        <div><p class="feature-eyebrow">Чистота в деталях</p><h2 id="gallery-title">До и после</h2></div>
+        <p class="feature-note" id="gallery-hint">Двигайте ползунок на фото. С клавиатуры используйте стрелки влево и вправо.</p>
+      </div>
+      <div class="row g-4">
+        <div class="col-12 col-md-4">
+          <figure class="comparison-figure">
+            <div class="comparison-frame">
+              <img class="comparison-photo comparison-after" src="images/comparison-body.webp" width="2172" height="724" loading="lazy" decoding="async" alt="Чистый тёмно-бирюзовый кузов после мойки">
+              <div class="comparison-before"><img class="comparison-photo" src="images/comparison-body.webp" width="2172" height="724" loading="lazy" decoding="async" alt="Тот же кузов с дорожной грязью до мойки"></div>
+              <span class="comparison-badge before" aria-hidden="true">До</span><span class="comparison-badge after" aria-hidden="true">После</span>
+              <span class="comparison-handle" aria-hidden="true"><span>↔</span></span>
+              <input class="comparison-range" type="range" min="0" max="100" value="50" disabled aria-label="Сравнить кузов до и после мойки" aria-describedby="gallery-hint">
+            </div>
+            <figcaption><h3>Кузов</h3><p>Смываем дорожную грязь и возвращаем блеск.</p></figcaption>
+          </figure>
+        </div>
+        <div class="col-12 col-md-4">
+          <figure class="comparison-figure">
+            <div class="comparison-frame">
+              <img class="comparison-photo comparison-after" src="images/comparison-wheels.webp" width="2172" height="724" loading="lazy" decoding="async" alt="Чистый серебристый колёсный диск после мойки">
+              <div class="comparison-before"><img class="comparison-photo" src="images/comparison-wheels.webp" width="2172" height="724" loading="lazy" decoding="async" alt="Тот же диск с налётом и грязью до мойки"></div>
+              <span class="comparison-badge before" aria-hidden="true">До</span><span class="comparison-badge after" aria-hidden="true">После</span>
+              <span class="comparison-handle" aria-hidden="true"><span>↔</span></span>
+              <input class="comparison-range" type="range" min="0" max="100" value="50" disabled aria-label="Сравнить диски до и после мойки" aria-describedby="gallery-hint">
+            </div>
+            <figcaption><h3>Диски</h3><p>Убираем налёт со спиц и обода.</p></figcaption>
+          </figure>
+        </div>
+        <div class="col-12 col-md-4">
+          <figure class="comparison-figure">
+            <div class="comparison-frame">
+              <img class="comparison-photo comparison-after" src="images/comparison-interior.webp" width="2172" height="724" loading="lazy" decoding="async" alt="Чистое тканевое сиденье и коврик после уборки">
+              <div class="comparison-before"><img class="comparison-photo" src="images/comparison-interior.webp" width="2172" height="724" loading="lazy" decoding="async" alt="То же сиденье с крошками и грязный коврик до уборки"></div>
+              <span class="comparison-badge before" aria-hidden="true">До</span><span class="comparison-badge after" aria-hidden="true">После</span>
+              <span class="comparison-handle" aria-hidden="true"><span>↔</span></span>
+              <input class="comparison-range" type="range" min="0" max="100" value="50" disabled aria-label="Сравнить салон до и после уборки" aria-describedby="gallery-hint">
+            </div>
+            <figcaption><h3>Салон</h3><p>Пылесосим обивку и очищаем коврики.</p></figcaption>
+          </figure>
+        </div>
+      </div>
+      <p class="gallery-note">Иллюстрации результата мойки, созданные с помощью ИИ.</p>
+      <noscript><p>Для перемещения ползунков включите JavaScript.</p></noscript>
+    </section>
+
     <section id="programs" class="container section-space" aria-labelledby="programs-title">
       <div class="section-heading">
         <div><h2 id="programs-title">Программы мойки</h2><p class="rates-note">Цена известна заранее. Дополнительные работы мастер согласует с вами.</p></div>
@@ -150,5 +197,6 @@
 
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="js/navigation.js"></script>
+  <script src="js/gallery.js"></script>
 </body>
 </html>
