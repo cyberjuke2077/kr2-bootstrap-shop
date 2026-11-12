@@ -68,6 +68,12 @@ function findWashProgram(id) {
   return washPrograms.find(program => program.id === id);
 }
 
+function recommendWashProgram(needs) {
+  if (!needs.length) return undefined;
+  return washPrograms.filter(program => needs.every(id => program.work.includes(id)))
+    .sort((a, b) => a.price - b.price || a.minutes - b.minutes)[0];
+}
+
 function programPrice(program) {
   return new Intl.NumberFormat('ru-RU').format(program.price) + '\u00a0₽';
 }

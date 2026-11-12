@@ -40,6 +40,7 @@
   <main id="main-content" tabindex="-1" class="container page-space">
     <div class="page-intro"><h1>Программы и цены</h1><p>Цены за один легковой автомобиль. Выберите программу, чтобы увидеть этапы работы и подобрать время.</p>
       <a class="text-action d-inline-block mt-3" href="#compare">Сравнить программы ↓</a>
+      <a class="text-action d-inline-block mt-3 ms-3" href="#program-picker">Помочь с выбором ↓</a>
     </div>
     <div class="row g-3 g-lg-4">
         <div class="col-12 col-md-6 col-lg-4">
@@ -103,6 +104,42 @@
       </div>
       <noscript><p>Для таблицы сравнения включите JavaScript. Цены и состав программ доступны в карточках выше.</p></noscript>
     </section>
+    <section id="program-picker" class="feature-section program-picker" aria-labelledby="picker-title">
+      <div class="section-heading">
+        <div><p class="feature-eyebrow">От задачи к программе</p><h2 id="picker-title">Что нужно очистить?</h2></div>
+        <p class="feature-note">Отметьте нужные зоны. Подберём самую доступную программу, в которую входят все выбранные работы.</p>
+      </div>
+      <div class="row g-4 align-items-center">
+        <div class="col-12 col-lg-7">
+          <form id="condition-form">
+            <fieldset>
+              <legend class="visually-hidden">Зоны автомобиля для очистки</legend>
+              <div class="condition-options">
+                <label class="condition-option"><input type="checkbox" class="form-check-input" name="needs" value="body"><span><strong>Кузов</strong><small>Дорожная грязь и пыль</small></span></label>
+                <label class="condition-option"><input type="checkbox" class="form-check-input" name="needs" value="wheels"><span><strong>Колёса</strong><small>Грязь на дисках</small></span></label>
+                <label class="condition-option"><input type="checkbox" class="form-check-input" name="needs" value="seats"><span><strong>Сиденья</strong><small>Песок и крошки на обивке</small></span></label>
+                <label class="condition-option"><input type="checkbox" class="form-check-input" name="needs" value="mats"><span><strong>Коврики</strong><small>Следы обуви и песок</small></span></label>
+              </div>
+            </fieldset>
+            <button type="reset" class="btn btn-link px-0 mt-2">Сбросить выбор</button>
+          </form>
+        </div>
+        <div class="col-12 col-lg-5" aria-live="polite" aria-atomic="true">
+          <p id="recommendation-empty" class="recommendation-empty">Отметьте хотя бы одну зону - здесь появится подходящая программа.</p>
+          <div id="recommendation" hidden>
+            <p class="feature-eyebrow">Подходит вашей машине</p>
+            <h3 id="recommended-name"></h3>
+            <p id="recommended-reason" class="text-muted"></p>
+            <p class="recommendation-facts"><strong id="recommended-price"></strong><span id="recommended-duration"></span></p>
+            <div class="d-flex flex-wrap gap-3 align-items-center">
+              <a id="recommended-booking" class="btn btn-primary">Выбрать время</a>
+              <a id="recommended-details" class="text-action">Весь состав →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <noscript><p>Для подбора включите JavaScript или выберите программу из каталога выше.</p></noscript>
+    </section>
     <section class="faq-section" aria-labelledby="faq-title">
       <div class="row gy-3 gx-lg-5">
         <div class="col-12 col-md-4"><h2 id="faq-title">Перед визитом</h2></div>
@@ -151,5 +188,6 @@
   <script src="js/navigation.js"></script>
   <script src="js/programs.js"></script>
   <script src="js/comparison.js"></script>
+  <script src="js/program-picker.js"></script>
 </body>
 </html>
