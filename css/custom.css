@@ -620,8 +620,8 @@ a { text-underline-offset: .17em; }
 .site-footer {
   background: #222626;
   color: #e0e1dc;
-  padding-block: 1.5rem;
-  font-size: .8125rem;
+  padding-block: 1.75rem;
+  font-size: .9375rem;
   font-weight: 400;
   line-height: 1.6;
 }
@@ -638,7 +638,7 @@ a { text-underline-offset: .17em; }
   align-items: center;
   gap: .6rem;
   color: #f7f7f2;
-  font-size: 1.3rem;
+  font-size: 1.5rem;
   font-weight: 650;
   line-height: 1;
   letter-spacing: -.035em;
@@ -646,13 +646,13 @@ a { text-underline-offset: .17em; }
 .footer-brand-mark {
   display: grid;
   place-items: center;
-  width: 2rem;
-  height: 2rem;
+  width: 2.25rem;
+  height: 2.25rem;
   border-radius: .5rem;
   background: var(--pine);
 }
 .footer-description { margin: .4rem 0 .15rem; }
-.footer-copyright { margin: 0; color: #a9b5af; font-size: .75rem; }
+.footer-copyright { margin: 0; color: #a9b5af; font-size: .875rem; }
 .footer-nav {
   display: flex;
   flex-direction: column;
@@ -676,10 +676,10 @@ a { text-underline-offset: .17em; }
   gap: .35rem;
   margin: 0;
 }
-.footer-icon { flex-shrink: 0; width: .95rem; height: .95rem; }
-.footer-address { min-height: 1.5rem; font-size: .75rem; }
-.footer-telephone { min-height: 1.5rem; font-size: .875rem; font-weight: 550; font-variant-numeric: tabular-nums; }
-.footer-hours { color: #a9b5af; font-size: .75rem; }
+.footer-icon { flex-shrink: 0; width: 1.1rem; height: 1.1rem; }
+.footer-address { min-height: 1.5rem; font-size: .875rem; }
+.footer-telephone { min-height: 1.5rem; font-size: 1rem; font-weight: 550; font-variant-numeric: tabular-nums; }
+.footer-hours { color: #a9b5af; font-size: .875rem; }
 .footer-booking {
   --bs-btn-bg: #b7f4d9;
   --bs-btn-color: #123739;
@@ -694,9 +694,9 @@ a { text-underline-offset: .17em; }
   display: inline-flex;
   align-items: center;
   gap: .4rem;
-  min-height: 2.2rem;
-  padding: .35rem .8rem;
-  font-size: .8125rem;
+  min-height: 2.5rem;
+  padding: .4rem .9rem;
+  font-size: .9375rem;
 }
 .site-footer .footer-booking, .site-footer .footer-booking:hover { color: #123739; }
 @media (max-width: 767.98px) {
