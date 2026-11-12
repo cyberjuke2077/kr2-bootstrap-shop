@@ -153,7 +153,7 @@ departureField.addEventListener('input', refreshTimes);
 timeField.addEventListener('change', updateVisit);
 retryTimes.addEventListener('click', refreshTimes);
 bookingForm.addEventListener('submit', submitBooking);
-bookingForm.addEventListener('reset', () => queueMicrotask(refreshTimes));
+bookingForm.addEventListener('reset', () => setTimeout(refreshTimes, 0));
 confirmation.addEventListener('hidden.bs.modal', () => {
   if (location.hash === '#requests') document.getElementById('requests-title').focus();
   else programField.focus();

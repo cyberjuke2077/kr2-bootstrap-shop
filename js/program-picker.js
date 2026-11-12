@@ -20,6 +20,7 @@ function updateRecommendation() {
 }
 
 conditionForm.addEventListener('change', updateRecommendation);
-conditionForm.addEventListener('reset', () => queueMicrotask(updateRecommendation));
+// При нажатии reset микрозадача может выполниться до стандартного сброса полей.
+conditionForm.addEventListener('reset', () => setTimeout(updateRecommendation, 0));
 conditionForm.addEventListener('submit', event => event.preventDefault());
 updateRecommendation();
