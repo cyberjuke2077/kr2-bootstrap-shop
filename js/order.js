@@ -4,6 +4,7 @@ const bookingForm = document.getElementById('booking-form');
 const programField = bookingForm.elements.namedItem('program');
 const dateField = bookingForm.elements.namedItem('date');
 const timeField = bookingForm.elements.namedItem('time');
+const departureField = bookingForm.elements.namedItem('departure');
 const bookingError = document.getElementById('booking-error');
 const confirmation = document.getElementById('confirmation-modal');
 const retryTimes = document.getElementById('retry-times');
@@ -35,8 +36,12 @@ function updateVisit() {
 }
 
 function setTimeChoices(times, hint, previous = '') {
+  const duration = selectedVisit()?.minutes || 0;
   timeField.replaceChildren(new Option('Выберите время', ''));
-  for (const time of times) timeField.add(new Option(time, time));
+  for (const time of times) {
+    const label = time + ' - готово в ' + clockLabel(clockMinutes(time) + duration);
+    timeField.add(new Option(label, time));
+  }
   if (times.includes(previous)) timeField.value = previous;
   timeField.disabled = !times.length;
   if (bookingForm.classList.contains('was-validated')) {
@@ -54,6 +59,20 @@ function setDateProblem(message = '') {
   }
 }
 
+function applyAvailability(program, day, bookings, previous) {
+  const now = moscowNow();
+  const deadline = departureField.value ? clockMinutes(departureField.value) : washHours.close;
+  const times = availableStarts(day, program.minutes, bookings, now, deadline);
+  let hint = departureField.value ? 'Машина будет готова не позднее ' + departureField.value + '.' : 'Выберите начало. Рядом указано время готовности.';
+  if (!times.length) {
+    const anyTime = availableStarts(day, program.minutes, bookings, now).length;
+    hint = anyTime && departureField.value
+      ? 'К ' + departureField.value + ' не успеваем. Укажите более поздний выезд или сократите состав услуг.'
+      : 'Для этих работ свободного времени нет. Выберите другую дату или сократите состав услуг.';
+  }
+  setTimeChoices(times, hint, previous);
+}
+
 async function refreshTimes() {
   const revision = ++timesRevision;
   syncExtraOptions(extraOptions, findWashProgram(programField.value));
@@ -67,19 +86,18 @@ async function refreshTimes() {
     setTimeChoices([], 'Сначала выберите программу и подходящую дату.');
     return;
   }
-
+  if (!departureField.validity.valid) {
+    setTimeChoices([], 'Проверьте время выезда.');
+    return;
+  }
   setTimeChoices([], 'Проверяем доступное время…');
   try {
     const bookings = await readRequests(day);
     if (revision !== timesRevision) return;
-    const times = availableStarts(day, program.minutes, bookings);
-    const hint = times.length ? 'Учитываем часы работы и ваши сохранённые визиты.' : 'Для этой программы на выбранный день времени больше нет.';
-    if (!times.length) setDateProblem(hint);
-    setTimeChoices(times, hint, previous);
+    applyAvailability(program, day, bookings, previous);
   } catch {
     if (revision !== timesRevision) return;
     const error = 'Не удалось прочитать расписание в этом браузере. Разрешите хранение данных и повторите проверку.';
-    setDateProblem(error);
     setTimeChoices([], error);
     retryTimes.hidden = false;
   }
@@ -98,7 +116,7 @@ async function submitBooking(event) {
   if (!validateContactForm(bookingForm)) return;
   const program = selectedVisit();
   if (!program || timeField.disabled || !timeField.value) {
-    showBookingError('Выберите доступное время начала визита.');
+    showBookingError(timeField.disabled ? document.getElementById('booking-time-hint').textContent : 'Выберите доступное время начала визита.');
     return;
   }
 
@@ -131,6 +149,7 @@ if (preset) programField.value = preset.id;
 programField.addEventListener('change', refreshTimes);
 extraOptions.addEventListener('change', refreshTimes);
 dateField.addEventListener('change', refreshTimes);
+departureField.addEventListener('input', refreshTimes);
 timeField.addEventListener('change', updateVisit);
 retryTimes.addEventListener('click', refreshTimes);
 bookingForm.addEventListener('submit', submitBooking);

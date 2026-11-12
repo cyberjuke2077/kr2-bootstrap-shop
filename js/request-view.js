@@ -30,8 +30,9 @@ function requestMessage(record) {
 }
 
 function requestOptions(record) {
-  return record.extras?.length
+  const extras = record.extras?.length
     ? ' Допуслуги: ' + record.extras.map(extra => extra.name + ' (+' + programPrice(extra) + ')').join(', ') + '.' : '';
+  return extras + (record.departure ? ' Машина нужна к ' + record.departure + ' (МСК).' : '');
 }
 
 function textElement(tag, text, className) {

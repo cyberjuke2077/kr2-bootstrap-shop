@@ -68,10 +68,17 @@
                   <div id="booking-date-error" class="invalid-feedback">Выберите сегодняшнюю или будущую дату.</div>
                 </div>
                 <div class="col-12 col-md-6">
+                  <label for="booking-departure" class="form-label">Машина нужна к <span>(по желанию)</span></label>
+                  <input id="booking-departure" name="departure" type="time" step="60" class="form-control" aria-describedby="departure-hint departure-error">
+                  <div id="departure-error" class="invalid-feedback">Укажите время выезда в формате ЧЧ:ММ.</div>
+                  <div id="departure-hint" class="form-text">В день визита, по Москве. Покажем начала мойки, чтобы успеть к выезду.</div>
+                </div>
+                <div class="col-12">
                   <label for="booking-time" class="form-label">Начало по Москве</label>
                   <select id="booking-time" name="time" class="form-select" required disabled aria-describedby="booking-time-hint booking-time-error"><option value="">Выберите время</option></select>
                   <div id="booking-time-error" class="invalid-feedback">Выберите время начала.</div>
                   <div id="booking-time-hint" class="form-text" aria-live="polite">Сначала выберите программу и дату.</div>
+                  <p class="form-text mb-0">Бокс работает с 08:00 до 22:00. Учитываем визиты, сохранённые в этом браузере.</p>
                   <button id="retry-times" class="btn btn-link px-0" type="button" hidden>Повторить проверку</button>
                 </div>
               </div>
